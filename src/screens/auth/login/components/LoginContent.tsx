@@ -36,6 +36,12 @@ function LoginContent(props: LoginContentProps) {
         isRequired
         label={'kkk'}
       />
+       <MTextInput
+        value={email}
+        onChangeText={onEmailChange}
+        isRequired
+        label={'kkksss'}
+      />
       {/* <Header style={styles.header} title={translate('login:login')} />
       <View style={styles.body}>
         <SizeBox height={24} />

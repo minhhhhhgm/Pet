@@ -7,7 +7,6 @@ import LoadingScreen from './loading/LoadingScreen';
 import ChooseReadMethod from './scanDocuments/chooseReadMethod/ChooseReadMethod';
 import ScanQRScreen from './scanDocuments/scanQR/ScanQRScreen';
 import ScanQRResultScreen from './scanDocuments/scanQRResult/ScanQRResultScreen';
-import ScanSocketQR from './scanDocuments/scanSocketQR/ScanSocketQR';
 
 export {
   LoadingScreen,
@@ -15,7 +14,6 @@ export {
   ScanQRScreen,
   ScanQRResultScreen,
   ChooseReadMethod,
-  ScanSocketQR,
   ResetPasswordScreen,
   AccountSettingScreen,
   DriverScreen,

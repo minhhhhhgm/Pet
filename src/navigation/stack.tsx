@@ -9,7 +9,6 @@ import {
   ScanQRResultScreen,
   LoadingScreen,
   ChooseReadMethod,
-  ScanSocketQR,
   AccountSettingScreen,
   ResetPasswordScreen,
   DriverScreen,
