@@ -36,18 +36,19 @@ export default function BottomTabBar({ state, descriptors }: any) {
 
     switch (routeName) {
       case screenNames.HOME_STACK:
-        return null
+        return null;
       case screenNames.DRIVERS_STACK:
-       return null
+        return null;
       case screenNames.PROFILE_STACK:
-        return null
+        return null;
       default:
         return;
     }
   };
 
   return (
-    <View style={[styles.containerStyle, { paddingBottom: isHasNotch ? 15 : 0 }]}>
+    <View
+      style={[styles.containerStyle, { paddingBottom: isHasNotch ? 15 : 0 }]}>
       {state.routes.map((route: any, index: number) => {
         const { options } = descriptors[route.key];
         const isFocused = state.index === index;

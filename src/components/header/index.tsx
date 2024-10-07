@@ -1,12 +1,27 @@
 import MText from 'components/text';
-import { View, StyleSheet, ViewStyle, StyleProp, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+  TouchableOpacity,
+} from 'react-native';
 import { HeaderButtonType } from 'types/header.type';
 import colors from 'utils/colors';
-import { BackIcon, Close, BellIcon, SettingsIcon, QuestionIcon } from 'utils/icons';
+import {
+  BackIcon,
+  Close,
+  BellIcon,
+  SettingsIcon,
+  QuestionIcon,
+} from 'utils/icons';
 
 type HeaderProps = {
   title: string;
-  headerLeftType?: HeaderButtonType.Back | HeaderButtonType.Text | HeaderButtonType.Close;
+  headerLeftType?:
+    | HeaderButtonType.Back
+    | HeaderButtonType.Text
+    | HeaderButtonType.Close;
   headerRightType?:
     | HeaderButtonType.Close
     | HeaderButtonType.Text
@@ -69,13 +84,19 @@ export default function Header({
   };
 
   const leftOnPressHandler = () => {
-    if (leftOnPress) return leftOnPress();
-    else return;
+    if (leftOnPress) {
+      return leftOnPress();
+    } else {
+      return;
+    }
   };
 
   const rightOnPressHandler = () => {
-    if (rightOnPress) return rightOnPress();
-    else return;
+    if (rightOnPress) {
+      return rightOnPress();
+    } else {
+      return;
+    }
   };
 
   return (

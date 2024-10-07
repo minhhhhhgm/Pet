@@ -2,14 +2,13 @@ import BottomTabBar from './bottomTabBar';
 import MButton from './buttons/mButton';
 import I3Card from './card/I3Card';
 import CheckBox from './checkBox';
-import CircularProgress from './circularProgress';
 import Container from './containers';
 import Column from './flexBox/column';
 import Row from './flexBox/row';
 import Header from './header';
 import MBCTextInput from './inputs/mobiconTextInput';
 import Loading from './loading';
-import MTextInput from './mInput';
+import TextField from './mInput';
 import AlertModal from './modal/alertModal';
 import BottomSheet from './modal/bottomSheet';
 import SizeBox from './sizeBox';
@@ -32,9 +31,8 @@ export {
   MText,
   I3Card,
   CheckBox,
-  CircularProgress,
   Header,
-  MTextInput,
+  TextField,
   Stepper,
   TextButton,
   MBCToast,

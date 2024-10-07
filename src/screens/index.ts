@@ -7,7 +7,7 @@ import LoadingScreen from './loading/LoadingScreen';
 import ChooseReadMethod from './scanDocuments/chooseReadMethod/ChooseReadMethod';
 import ScanQRScreen from './scanDocuments/scanQR/ScanQRScreen';
 import ScanQRResultScreen from './scanDocuments/scanQRResult/ScanQRResultScreen';
-
+import MainCamera from './mainCamera/MainCamera';
 export {
   LoadingScreen,
   LoginScreen,
@@ -18,4 +18,5 @@ export {
   AccountSettingScreen,
   DriverScreen,
   HomeScreen,
+  MainCamera,
 };

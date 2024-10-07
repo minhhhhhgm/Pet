@@ -19,13 +19,25 @@ const SkipConfirmModal = ({
   return (
     <BottomSheet visible={visible} closeModal={closeModal}>
       <SizeBox height={8} />
-      <MText style={styles.confirmText}>{"translate('scanQRCode.titleSkipModal')"}</MText>
+      <MText style={styles.confirmText}>
+        {"translate('scanQRCode.titleSkipModal')"}
+      </MText>
       <SizeBox height={16} />
-      <MButton thirdType label={"translate('scanQRCode.skipCheck')"} onPress={onSkipThisCar} />
+      <MButton
+        thirdType
+        label={"translate('scanQRCode.skipCheck')"}
+        onPress={onSkipThisCar}
+      />
       <SizeBox height={8} />
-      <MButton thirdType label={"translate('scanQRCode.skipAll')"} onPress={onSkipAllCar} />
+      <MButton
+        thirdType
+        label={"translate('scanQRCode.skipAll')"}
+        onPress={onSkipAllCar}
+      />
       <SizeBox height={16} />
-      <MText style={styles.warningText}>{"translate('scanQRCode.warningInSkipModal')"}</MText>
+      <MText style={styles.warningText}>
+        {"translate('scanQRCode.warningInSkipModal')"}
+      </MText>
     </BottomSheet>
   );
 };

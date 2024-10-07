@@ -3,7 +3,7 @@ import { CarInformation } from 'types/carInformation.type';
 export const read5QrNormalCar = (
   erased: boolean,
   freeabled: boolean,
-  qr: string[]
+  qr: string[],
 ): CarInformation => {
   let qr1 = null;
   let qr2 = null;
@@ -52,7 +52,11 @@ export const read5QrNormalCar = (
   if (code1[3] && code1[3] !== '999999') {
     inspection_limit =
       (Number('20' + code1[3].slice(0, 2) <= now + 4) ? '20' : '19') +
-      (code1[3].slice(0, 2) + '/' + code1[3].slice(2, 4) + '/' + code1[3].slice(4, 6));
+      (code1[3].slice(0, 2) +
+        '/' +
+        code1[3].slice(2, 4) +
+        '/' +
+        code1[3].slice(4, 6));
   }
 
   const first_registration_year =
@@ -68,7 +72,8 @@ export const read5QrNormalCar = (
     inspection_limit: inspection_limit,
     first_registration_year: first_registration_year,
     first_registration_month: first_registation_month, // 月
-    first_registration: first_registration_year + '-' + first_registation_month + '-01', // 初年度登録（年月）
+    first_registration:
+      first_registration_year + '-' + first_registation_month + '-01', // 初年度登録（年月）
     model_code: code1[5], // 型式
 
     transport_bu_name: code2[1].slice(0, 4).trim(), // transport_bu_name
@@ -107,12 +112,19 @@ export const read3QrLightCar = (qr: string[]) => {
     ruibetsu_kbn: code3[3].slice(5, 9), // 類別区分番号
     // 有効期限満了日(車検期限)
     inspection_limit:
-      (Number('20' + code3[4].slice(0, 2)) <= currentDate.getFullYear() + 4 ? '20' : '19') +
-      (code3[4].slice(0, 2) + '/' + code3[4].slice(2, 4) + '/' + code3[4].slice(4, 6)),
+      (Number('20' + code3[4].slice(0, 2)) <= currentDate.getFullYear() + 4
+        ? '20'
+        : '19') +
+      (code3[4].slice(0, 2) +
+        '/' +
+        code3[4].slice(2, 4) +
+        '/' +
+        code3[4].slice(4, 6)),
     // 初年度登録
     first_registration_year: first_registration_year,
     first_registration_month: first_registation_month, // 月
-    first_registration: first_registration_year + '-' + first_registation_month + '-01', // 初年度登録（年月）
+    first_registration:
+      first_registration_year + '-' + first_registation_month + '-01', // 初年度登録（年月）
     model_code: code3[6], // 型式（最大２０桁）
     registry_no_erased: code2[6] === '2' || code2[6] === '4' ? 1 : 0, // 抹消
   };
@@ -144,11 +156,18 @@ export const read6QrLightCar = (qr: string[]) => {
     katashiki_num: code3[3].slice(0, 5), // 型式指定番号
     ruibetsu_kbn: code3[3].slice(5, 9), // 類別区分番号
     inspection_limit:
-      (Number('20' + code3[4].slice(0, 2)) <= currentDate.getFullYear() + 4 ? '20' : '19') +
-      (code3[4].slice(0, 2) + '/' + code3[4].slice(2, 4) + '/' + code3[4].slice(4, 6)),
+      (Number('20' + code3[4].slice(0, 2)) <= currentDate.getFullYear() + 4
+        ? '20'
+        : '19') +
+      (code3[4].slice(0, 2) +
+        '/' +
+        code3[4].slice(2, 4) +
+        '/' +
+        code3[4].slice(4, 6)),
     first_registration_year: first_registration_year,
     first_registration_month: first_registation_month, // 月
-    first_registration: first_registration_year + '-' + first_registation_month + '-01', // 初年度登録（年月）
+    first_registration:
+      first_registration_year + '-' + first_registation_month + '-01', // 初年度登録（年月）
     model_code: code3[6], // 型式（最大２０桁）
     user_name: code4[2], // 使用者氏名
     user_address: code5[2], // 使用者住所

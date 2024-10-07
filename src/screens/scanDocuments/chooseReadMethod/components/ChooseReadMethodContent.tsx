@@ -50,7 +50,10 @@ const ChooseReadMethodContent = ({
       />
 
       <SizeBox height={40} />
-      <MButton label={"translate('scanQRCode.chooseReadMethod.beginRead')"} onPress={onSubmit} />
+      <MButton
+        label={"translate('scanQRCode.chooseReadMethod.beginRead')"}
+        onPress={onSubmit}
+      />
     </Container>
   );
 };

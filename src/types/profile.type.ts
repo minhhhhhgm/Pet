@@ -9,7 +9,7 @@ export interface IProfile {
     {
       role_id: number;
       role_name: string;
-    }
+    },
   ];
   success: boolean;
 }

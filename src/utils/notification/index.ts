@@ -27,7 +27,7 @@ export const createNotificationChannel = () => {
       playSound: true,
       importance: Importance.HIGH,
     },
-    () => {}
+    () => {},
   );
 };
 

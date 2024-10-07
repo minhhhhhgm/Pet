@@ -42,7 +42,10 @@ function MButton(props: CommonRoundedButtonProps) {
       style={[
         primaryType && styles.primary,
         secondaryType && { backgroundColor: colors.white },
-        thirdType && { backgroundColor: colors.white, borderColor: colors.gray[20] },
+        thirdType && {
+          backgroundColor: colors.white,
+          borderColor: colors.gray[20],
+        },
         disabled && {
           backgroundColor: colors.gray[30],
           borderColor: colors.gray[30],

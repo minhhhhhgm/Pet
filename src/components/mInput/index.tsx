@@ -1,96 +1,78 @@
-import MText from 'components/text';
-import React, { useState } from 'react';
-import { StyleSheet, TextInputProps, TextInput as TextInputRN, View } from 'react-native';
+import React, { ReactElement, ReactNode, useRef } from 'react';
+import {
+  StyleProp,
+  TextInput,
+  TextInputProps,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import colors from 'utils/colors';
-// import { useAppTranslation } from 'utils/languages';
 
-interface MInputProps extends TextInputProps {
-  label: string;
-  isRequired?: boolean;
-  secondaryRequiredType?: boolean;
+export interface TextFieldProps extends TextInputProps {
+  label?: string;
+  placeholder?: any;
+  style?: StyleProp<TextStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
+  inputWrapperStyle?: StyleProp<ViewStyle>;
+  RightIcon?: ReactNode;
+  LeftIcon?: ReactNode;
 }
-
-function MTextInput(props: MInputProps) {
-  const { label, isRequired = false, secondaryRequiredType = false } = props;
-
-  const [isFocused, setFocused] = useState(false);
-  // const translate = useAppTranslation('common');
-  const onFocus = () => {
-    setFocused(true);
-  };
-  const onBlur = () => {
-    setFocused(false);
-  };
+const TextField = (props: TextFieldProps) => {
+  const {
+    label,
+    placeholder,
+    RightIcon,
+    LeftIcon,
+    style,
+    containerStyle,
+    inputWrapperStyle,
+    value,
+    ...TextInputProps
+  } = props;
+  const input = useRef<TextInput>(null);
+  function focusInput() {
+    input.current?.focus();
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.rowLabel}>
-        <MText fontSize={14}>{label}</MText>
-        {isRequired && (
-          <>
-            {!secondaryRequiredType && (
-              <MText
-                fontSize={14}
-                fontWeight="700"
-                color={colors.pink[10]}
-                style={styles.textFieldRequired}>
-                {"pd"}
-              </MText>
-            )}
-            {secondaryRequiredType && (
-              <View style={styles.viewSecondary}>
-                <MText fontWeight="700" color={colors.white}>
-                  {"llsdl"}
-                </MText>
-              </View>
-            )}
-          </>
-        )}
+    <TouchableOpacity
+      activeOpacity={1}
+      style={containerStyle}
+      onPress={focusInput}>
+      <View style={[inputWrapperStyleRoot, inputWrapperStyle]}>
+        {LeftIcon && LeftIcon}
+        <TextInput
+          ref={input}
+          underlineColorAndroid={'transparent'}
+          placeholder={placeholder}
+          placeholderTextColor={'gray'}
+          style={[inputStyle, style]}
+          value={value}
+          cursorColor="orange"
+          selectionColor="orange"
+          {...TextInputProps}
+        />
       </View>
-      <TextInputRN
-        {...props}
-        style={[styles.inputContainer, isFocused && { borderColor: colors.blue[100] }]}
-        placeholderTextColor={colors.gray[20]}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
-    </View>
+    </TouchableOpacity>
   );
-}
+};
 
-export default MTextInput;
+export default TextField;
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'flex-start',
-    alignSelf: 'stretch',
-  },
-  textFieldRequired: {
-    marginLeft: 8,
-  },
-  viewSecondary: {
-    backgroundColor: colors.yellow[10],
-    paddingTop: 2,
-    paddingBottom: 3,
-    paddingHorizontal: 7,
-    marginLeft: 8,
-    borderRadius: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputContainer: {
-    fontSize: 14,
-    borderColor: colors.gray[60],
-    borderRadius: 4,
-    borderWidth: 1,
-    backgroundColor: colors.white,
-    height: 53,
-    padding: 16,
-    color: colors.black[90],
-  },
-  rowLabel: {
-    flexDirection: 'row',
-    marginBottom: 8,
-    alignItems: 'center',
-  },
-});
+const inputWrapperStyleRoot: ViewStyle = {
+  flexDirection: 'row',
+  // borderWidth: 1,
+  borderColor: '#909090',
+  borderRadius: 16,
+  backgroundColor: '#222222',
+  minHeight: 55,
+};
+
+const inputStyle: TextStyle = {
+  fontSize: 21,
+  paddingHorizontal: 16,
+  color: colors.white,
+  flex: 1,
+};

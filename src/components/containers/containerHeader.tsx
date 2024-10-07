@@ -35,7 +35,10 @@ const HeaderView = (props: Props) => {
         <MText
           style={[
             styles.backButtonTitle,
-            secondBackButtonTitle && { color: colors.gray[20], fontWeight: '600' },
+            secondBackButtonTitle && {
+              color: colors.gray[20],
+              fontWeight: '600',
+            },
           ]}>
           {backButtonTitle}
         </MText>

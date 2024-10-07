@@ -1,7 +1,13 @@
 import SizeBox from 'components/sizeBox';
 import MText from 'components/text';
 import React from 'react';
-import { Pressable, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import colors from 'utils/colors';
 import { CheckBoxSelectedIcon, CheckBoxUnSelectedIcon } from 'utils/icons';
 
@@ -27,7 +33,11 @@ const CheckBox = (props: CheckBoxProps) => {
     <View
       style={[
         styles.container,
-        isGrayBackground && { backgroundColor: colors.gray[50], padding: 8, borderRadius: 8 },
+        isGrayBackground && {
+          backgroundColor: colors.gray[50],
+          padding: 8,
+          borderRadius: 8,
+        },
         checkBoxContainerStyle,
       ]}>
       <Pressable style={styles.checkBox} onPress={() => onValueChange(!value)}>

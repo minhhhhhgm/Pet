@@ -1,4 +1,11 @@
-import { Container, SizeBox, MText, MButton, Header, MTextInput } from 'components';
+import {
+  Container,
+  SizeBox,
+  MText,
+  MButton,
+  Header,
+  MTextInput,
+} from 'components';
 import { goBack } from 'navigation/service';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -16,7 +23,14 @@ type ResetPasswordContentProps = {
 };
 
 function ResetPasswordContent(props: ResetPasswordContentProps) {
-  const { email, onEmailChange, emailConfirm, onEmailConfirmChange, isValid, onSend } = props;
+  const {
+    email,
+    onEmailChange,
+    emailConfirm,
+    onEmailConfirmChange,
+    isValid,
+    onSend,
+  } = props;
 
   const translate = useAppTranslation('resetPassword');
   return (
@@ -49,7 +63,11 @@ function ResetPasswordContent(props: ResetPasswordContentProps) {
           label={translate('resetPassword:confirmEmailAddress')}
         />
         <SizeBox height={40} />
-        <MButton disabled={!isValid} label={translate('resetPassword:send')} onPress={onSend} />
+        <MButton
+          disabled={!isValid}
+          label={translate('resetPassword:send')}
+          onPress={onSend}
+        />
       </View>
     </Container>
   );

@@ -7,7 +7,9 @@ const useEmailConfirmValidator = (email: string, emailConfirm: string) => {
     const isValid = validateEmail(emailConfirm);
     if (isValid && emailConfirm === email) {
       setValid(true);
-    } else setValid(false);
+    } else {
+      setValid(false);
+    }
   }, [email, emailConfirm]);
   return isValidEmailConfirm;
 };

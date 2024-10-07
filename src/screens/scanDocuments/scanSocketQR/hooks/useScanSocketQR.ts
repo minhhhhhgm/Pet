@@ -40,7 +40,9 @@ const useScanSocketQR = () => {
   const onQRCodeRead = (event: any) => {
     if (isScanning && isCameraActive.current) {
       const value: SocketQRData & string = event.nativeEvent.codeStringValue;
-      if (!isJsonString(value)) return;
+      if (!isJsonString(value)) {
+        return;
+      }
       const socketData: SocketQRData = JSON.parse(value);
       if (socketData.token) {
         isCameraActive.current = false;
@@ -52,7 +54,10 @@ const useScanSocketQR = () => {
           setLoading(false);
           clearTimeout(timeoutShowWarning);
           setShowWarning(false);
-          navigate(screenNames.SCAN_QR_SCREEN, { useSocket: true, ...socketData });
+          navigate(screenNames.SCAN_QR_SCREEN, {
+            useSocket: true,
+            ...socketData,
+          });
           isCameraActive.current = true;
         }, CONSTANTS.WAITING_WEBSOCKET_CONNECT);
       }
@@ -70,7 +75,7 @@ const useScanSocketQR = () => {
     setTimeoutShowWarning(
       setTimeout(() => {
         setShowWarning(true);
-      }, 30000)
+      }, 30000),
     );
   }, []);
 

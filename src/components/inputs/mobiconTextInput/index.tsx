@@ -22,7 +22,8 @@ function MBCTextInput(props: MBCTextInput) {
           <View
             style={[
               styles.focusBorder,
-              !!size.width && !!size.height && { width: size.width, height: size.height },
+              !!size.width &&
+                !!size.height && { width: size.width, height: size.height },
             ]}
           />
         )}

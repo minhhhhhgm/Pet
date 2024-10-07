@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from 'reduxStore';
 
-
-
 Appearance.setColorScheme('light');
 
 const App = () => {
@@ -24,4 +22,3 @@ const App = () => {
 };
 
 export default App;
-

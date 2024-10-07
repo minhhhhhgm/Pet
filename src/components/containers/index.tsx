@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 import {
   ScrollView,
   KeyboardAvoidingView,
@@ -13,22 +13,17 @@ import {
 } from 'react-native';
 import colors from 'utils/colors';
 import { isIOS } from 'utils/helpers';
-import HeaderView from './containerHeader';
 
 interface IContainerProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   BGColor?: string;
-  title?: string;
-  showBackButton?: boolean;
-  showBackButtonIcon?: boolean;
-  backButtonTitle?: string;
   isShowHeader?: boolean;
   scrollable?: boolean;
   avoidKeyboard?: boolean;
   useDismissKeyboard?: boolean;
-  secondBackButtonTitle?: boolean;
-  onBack?(): void;
+  renderHeader?: ReactNode;
+  topSafeAreaColor?: string;
 }
 
 function Container({
@@ -36,45 +31,33 @@ function Container({
   style,
   BGColor = colors.gray[70],
   scrollable = false,
-  title = '',
-  showBackButton = false,
-  showBackButtonIcon = false,
-  backButtonTitle = "translate('navigationBar.backButtonTitle')",
   isShowHeader = false,
   avoidKeyboard = true,
   useDismissKeyboard,
-  secondBackButtonTitle,
-  onBack,
+  renderHeader,
+  topSafeAreaColor,
 }: IContainerProps) {
-  const renderHeader = () => {
-    return (
-      <HeaderView
-        title={title}
-        showBackButton={showBackButton}
-        showBackButtonIcon={showBackButtonIcon}
-        backButtonTitle={backButtonTitle}
-        secondBackButtonTitle={secondBackButtonTitle}
-        onBack={onBack}
-      />
-    );
-  };
-
   const renderContainer = () => {
     return (
-      <TouchableWithoutFeedback disabled={!useDismissKeyboard} onPress={Keyboard.dismiss}>
+      <TouchableWithoutFeedback
+        disabled={!useDismissKeyboard}
+        onPress={Keyboard.dismiss}>
         <View style={{ flex: 1, backgroundColor: BGColor }}>
           <StatusBar
             animated
             translucent={false}
             showHideTransition="fade"
-            barStyle="dark-content"
-            backgroundColor={isShowHeader ? colors.white : colors.gray[10]}
+            barStyle="light-content"
+            backgroundColor={isShowHeader ? colors.white : colors.black[100]}
           />
-          {isShowHeader ? (
-            renderHeader()
-          ) : (
-            <SafeAreaView style={{ backgroundColor: colors.gray[80] }} />
-          )}
+          <SafeAreaView
+            style={{
+              backgroundColor: !topSafeAreaColor
+                ? colors.backdrops[20]
+                : topSafeAreaColor,
+            }}
+          />
+          {renderHeader}
 
           {scrollable ? (
             <ScrollView
@@ -87,7 +70,9 @@ function Container({
           ) : (
             <>
               <View style={[styles.container, style]}>{children}</View>
-              <SafeAreaView style={{ backgroundColor: BGColor || colors.white }} />
+              <SafeAreaView
+                style={{ backgroundColor: BGColor || colors.white }}
+              />
             </>
           )}
         </View>

@@ -38,7 +38,10 @@ const AlertModal = ({
       <>
         {subTitle && (
           <MText
-            style={[styles.content, { color: subTitleColor ? subTitleColor : colors.black[100] }]}>
+            style={[
+              styles.content,
+              { color: subTitleColor ? subTitleColor : colors.black[100] },
+            ]}>
             {subTitle}
           </MText>
         )}
@@ -55,8 +58,12 @@ const AlertModal = ({
           {renderSubtitleView()}
           <SizeBox height={40} />
           <View style={styles.buttonWrapper}>
-            <Pressable onPress={closeExitModal} style={[styles.button, styles.cancelButton]}>
-              <MText style={[styles.buttonText, styles.cancelButtonText]}>{closeExitTitle}</MText>
+            <Pressable
+              onPress={closeExitModal}
+              style={[styles.button, styles.cancelButton]}>
+              <MText style={[styles.buttonText, styles.cancelButtonText]}>
+                {closeExitTitle}
+              </MText>
             </Pressable>
             <Pressable
               onPress={onSubmitExitModal}

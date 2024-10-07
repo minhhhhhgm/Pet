@@ -25,11 +25,13 @@ const BottomSheet = ({
       hasBackdrop
       onBackdropPress={() => !fullScreen && closeModal()}
       style={{ margin: 0 }}
-      animationIn="slideInUp"
-      animationOut="slideOutDown"
+      animationIn='zoomIn'
+      animationOut='zoomOut'
       isVisible={visible}>
       <SafeAreaView />
-      <View style={[styles.modal, fullScreen && { flex: 1 }, containerStyle]}>{children}</View>
+      <View style={[styles.modal, fullScreen && { flex: 1 }, containerStyle]}>
+        {children}
+      </View>
       <SafeAreaView style={{ backgroundColor: colors.white }} />
     </Modal>
   );
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     marginTop: 'auto',
   },
   title: {

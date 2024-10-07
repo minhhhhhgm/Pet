@@ -5,16 +5,28 @@ import { BaseToastProps } from 'react-native-toast-message';
 import colors from 'utils/colors';
 import { ToastSuccess, WarningIcon } from 'utils/icons';
 
-const MBCToast = ({ error, text1, text2 }: { error: boolean } & BaseToastProps) => {
+const MBCToast = ({
+  error,
+  text1,
+  text2,
+}: { error: boolean } & BaseToastProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.wrapper, error && { borderColor: colors.primary }]}>
-        {error ? <WarningIcon width={24} height={24} /> : <ToastSuccess width={24} height={24} />}
+        {error ? (
+          <WarningIcon width={24} height={24} />
+        ) : (
+          <ToastSuccess width={24} height={24} />
+        )}
         <SizeBox width={8} />
         <View style={styles.titleContentWrapper}>
-          <MText style={[styles.title, error && { color: colors.primary }]}>{text2}</MText>
+          <MText style={[styles.title, error && { color: colors.primary }]}>
+            {text2}
+          </MText>
           <SizeBox height={4} />
-          <MText style={[styles.content, error && { color: colors.primary }]}>{text1}</MText>
+          <MText style={[styles.content, error && { color: colors.primary }]}>
+            {text1}
+          </MText>
         </View>
       </View>
     </SafeAreaView>

@@ -3,7 +3,6 @@ import useStorage, { getUserStorage } from 'hooks/useStorage';
 import { useCallback } from 'react';
 import Config from 'react-native-config';
 
-
 const getLogInData = async () => {
   const result = await getUserStorage('LOGIN_DATA');
   return result;
@@ -27,7 +26,7 @@ instance.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Add a response interceptor
@@ -37,7 +36,7 @@ instance.interceptors.response.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 
 function useRequest() {
@@ -47,79 +46,97 @@ function useRequest() {
   const getRequest = useCallback(
     async <Body, Response>(url: string, params?: Body): Promise<Response> => {
       try {
-        const res = await instance.get<Response, AxiosResponse<Response>, Body>(url, { params });
-        return handleResponse<Body, Response>(res);
-      } catch (error) {
-        return handleError(error);
-      }
-    },
-    [instance]
-  );
-
-  const postRequest = useCallback(
-    async <Body, Response>(url: string, data?: Body): Promise<Response> => {
-      try {
-        const res = await instance.post<Response, AxiosResponse<Response>, Body>(url, data);
-        return handleResponse<Body, Response>(res);
-      } catch (error) {
-        return handleError(error);
-      }
-    },
-    [instance]
-  );
-
-  const putRequest = useCallback(
-    async <Body, Response>(url: string, data?: Body): Promise<Response> => {
-      try {
-        const res = await instance.put<Response, AxiosResponse<Response>, Body>(url, data);
-        return handleResponse<Body, Response>(res);
-      } catch (error) {
-        return handleError(error);
-      }
-    },
-    [instance]
-  );
-
-  const patchRequest = useCallback(
-    async <Body, Response>(url: string, data?: Body): Promise<Response> => {
-      try {
-        const res = await instance.patch<Response, AxiosResponse<Response>, Body>(url, data);
-        return handleResponse<Body, Response>(res);
-      } catch (error) {
-        return handleError(error);
-      }
-    },
-    [instance]
-  );
-
-  const deleteRequest = useCallback(
-    async <Body, Response>(url: string, params?: Body): Promise<Response> => {
-      try {
-        const res = await instance.delete<Response, AxiosResponse<Response>, Body>(url, { params });
-        return handleResponse<Body, Response>(res);
-      } catch (error) {
-        return handleError(error);
-      }
-    },
-    [instance]
-  );
-
-  const postMultipartFormRequest = useCallback(
-    async <Response>(url: string, formData: FormData): Promise<Response> => {
-      try {
-        const res = await instance.post<Response, AxiosResponse<Response>, FormData>(
+        const res = await instance.get<Response, AxiosResponse<Response>, Body>(
           url,
-          formData,
-          {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          }
+          { params },
         );
         return handleResponse<Body, Response>(res);
       } catch (error) {
         return handleError(error);
       }
     },
-    []
+    [instance],
+  );
+
+  const postRequest = useCallback(
+    async <Body, Response>(url: string, data?: Body): Promise<Response> => {
+      try {
+        const res = await instance.post<
+          Response,
+          AxiosResponse<Response>,
+          Body
+        >(url, data);
+        return handleResponse<Body, Response>(res);
+      } catch (error) {
+        return handleError(error);
+      }
+    },
+    [instance],
+  );
+
+  const putRequest = useCallback(
+    async <Body, Response>(url: string, data?: Body): Promise<Response> => {
+      try {
+        const res = await instance.put<Response, AxiosResponse<Response>, Body>(
+          url,
+          data,
+        );
+        return handleResponse<Body, Response>(res);
+      } catch (error) {
+        return handleError(error);
+      }
+    },
+    [instance],
+  );
+
+  const patchRequest = useCallback(
+    async <Body, Response>(url: string, data?: Body): Promise<Response> => {
+      try {
+        const res = await instance.patch<
+          Response,
+          AxiosResponse<Response>,
+          Body
+        >(url, data);
+        return handleResponse<Body, Response>(res);
+      } catch (error) {
+        return handleError(error);
+      }
+    },
+    [instance],
+  );
+
+  const deleteRequest = useCallback(
+    async <Body, Response>(url: string, params?: Body): Promise<Response> => {
+      try {
+        const res = await instance.delete<
+          Response,
+          AxiosResponse<Response>,
+          Body
+        >(url, { params });
+        return handleResponse<Body, Response>(res);
+      } catch (error) {
+        return handleError(error);
+      }
+    },
+    [instance],
+  );
+
+  const postMultipartFormRequest = useCallback(
+    async <Response>(url: string, formData: FormData): Promise<Response> => {
+      try {
+        const res = await instance.post<
+          Response,
+          AxiosResponse<Response>,
+          FormData
+        >(url, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        return handleResponse<Body, Response>(res);
+      } catch (error) {
+        return handleError(error);
+      }
+    },
+    [],
   );
 
   const handleResponse = useCallback(
@@ -130,7 +147,7 @@ function useRequest() {
       }
       return res.data;
     },
-    []
+    [],
   );
 
   const handleError = useCallback((error: any) => {
@@ -138,7 +155,10 @@ function useRequest() {
     if (error && error.response) {
       if (error.response.status === 401) {
         logout();
-      } else if (error.response.status >= 500 || error.response.status === 404) {
+      } else if (
+        error.response.status >= 500 ||
+        error.response.status === 404
+      ) {
         // toastError(error.response?.data?.message || translate('common:systemError'));
       }
     } else if (errorParse.message) {

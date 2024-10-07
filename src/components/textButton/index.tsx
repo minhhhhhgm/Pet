@@ -1,7 +1,13 @@
 import SizeBox from 'components/sizeBox';
 import MText from 'components/text';
 import React, { ReactNode } from 'react';
-import { StyleProp, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import {
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 
 interface TextButtonProps {
   text: string;

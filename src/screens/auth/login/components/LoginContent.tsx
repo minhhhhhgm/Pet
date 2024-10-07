@@ -1,10 +1,12 @@
-import { Container, SizeBox, MButton, Header, MTextInput, TextButton } from 'components';
-import React from 'react';
+import auth from '@react-native-firebase/auth';
+import { Container, MButton, MText, SizeBox, TextField } from 'components';
+import { navigate } from 'navigation/service';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-// import { isTablet } from 'react-native-device-info';
+import { Camera, useCameraDevice } from 'react-native-vision-camera';
 import colors from 'utils/colors';
-// import { QuestionMarkIcon } from 'utils/icons';
-// import { useAppTranslation } from 'utils/languages';
+import { VnFlag } from 'utils/icons';
+import { deviceHeight } from 'utils/themes';
 
 type LoginContentProps = {
   email?: string;
@@ -27,51 +29,69 @@ function LoginContent(props: LoginContentProps) {
     onLogin,
   } = props;
 
-  // const translate = useAppTranslation('login');
+  const [confirm, setConfirm] = useState<any>(null);
+  const [code, setCode] = useState<any>('');
+
+  async function signInWithPhoneNumberF() {
+    try {
+      const confirmation = await auth().signInWithPhoneNumber('+84 0373841282');
+      setConfirm(confirmation);
+      console.log('conf', confirmation);
+    } catch (error) {
+      console.error('Error during phone sign-in:', error);
+    }
+  }
+
+  async function confirmCode() {
+    try {
+      await confirm.confirm(code);
+    } catch (error) {
+      console.log('Invalid code.');
+    }
+  }
+
+  const device = useCameraDevice('back');
+
   return (
-    <Container useDismissKeyboard avoidKeyboard={false}>
-      <MTextInput
-        value={email}
-        onChangeText={onEmailChange}
-        isRequired
-        label={'kkk'}
+    <Container useDismissKeyboard avoidKeyboard={false} BGColor="#111111">
+      {/* <SizeBox height={200} /> */}
+      <Camera
+                    style={{
+                        // position: 'absolute',
+                        top: 100,
+                        width: '100%',
+                        height: deviceHeight * 0.6,
+                    }}
+                    device={device!}
+                    isActive={true}
+                    photo={true}
+                    //   video={true}
+                    // ref={camera}
+                />
+      <View style={{ alignItems: 'center' }}>
+        <MText fontSize={24} fontWeight="700">
+          What's your numbers?
+        </MText>
+      </View>
+      <SizeBox height={24} />
+      <TextField
+        inputWrapperStyle={{ marginHorizontal: 28, paddingHorizontal: 6 }}
+        LeftIcon={
+          <View
+            style={{
+              justifyContent: 'center',
+              marginLeft: 10,
+            }}>
+            <VnFlag width={25} height={36} />
+          </View>
+        }
       />
-       <MTextInput
-        value={email}
-        onChangeText={onEmailChange}
-        isRequired
-        label={'kkksss'}
+      <MButton
+        onPress={() => {
+          // signInWithPhoneNumberF()
+          navigate('MAIN_CAM');
+        }}
       />
-      {/* <Header style={styles.header} title={translate('login:login')} />
-      <View style={styles.body}>
-        <SizeBox height={24} />
-        <MTextInput
-          value={email}
-          onChangeText={onEmailChange}
-          isRequired
-          label={translate('login:emailAddress')}
-        />
-        <SizeBox height={16} />
-        <MTextInput
-          value={password}
-          onChangeText={onPasswordChange}
-          secureTextEntry
-          isRequired
-          label={translate('login:password')}
-        />
-        <SizeBox height={26} />
-        <TextButton
-          icon={<QuestionMarkIcon />}
-          text={translate('login:forgotPassword')}
-          onPress={onPushResetPassword!}
-        />
-        <SizeBox height={50} />
-        <MButton
-          disabled={!isPasswordAndEmailValid}
-          label={translate('login:next')}
-          onPress={onLogin}
-        />
-      </View> */}
     </Container>
   );
 }

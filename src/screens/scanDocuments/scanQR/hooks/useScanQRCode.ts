@@ -92,7 +92,7 @@ const useScanQRCode = () => {
     setTimeoutShowWarning(
       setTimeout(() => {
         setShowWarning(true);
-      }, 30000)
+      }, 30000),
     );
   }, []);
 

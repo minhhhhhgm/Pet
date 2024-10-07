@@ -9,11 +9,16 @@ export enum ReadMethod {
 }
 
 const useChooseReadMethod = () => {
-  const [selectedMethod, setSelectedMethod] = useState<ReadMethod>(ReadMethod.IC);
+  const [selectedMethod, setSelectedMethod] = useState<ReadMethod>(
+    ReadMethod.IC,
+  );
 
   const readMethods = [
     // { label: translate('scanQRCode.chooseReadMethod.readICCard'), id: ReadMethod.IC }, // TODO
-    { label: "translate('scanQRCode.chooseReadMethod.scanQRCode')", id: ReadMethod.QR },
+    {
+      label: "translate('scanQRCode.chooseReadMethod.scanQRCode')",
+      id: ReadMethod.QR,
+    },
     {
       label: "translate('scanQRCode.chooseReadMethod.scanQRCodeMobicon')",
       id: ReadMethod.MOBICON_QR,

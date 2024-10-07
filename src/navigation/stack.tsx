@@ -1,4 +1,7 @@
-import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Loading, BottomTabBar } from 'components';
 import React, { Fragment } from 'react';
@@ -13,6 +16,7 @@ import {
   ResetPasswordScreen,
   DriverScreen,
   HomeScreen,
+  MainCamera,
 } from 'screens';
 import colors from 'utils/colors';
 import screenNames from 'utils/constants/screenNames';
@@ -35,11 +39,24 @@ export const RootStack = () => {
         initialRouteName={screenNames.LOADING}>
         <Root.Screen name={screenNames.LOADING} component={LoadingScreen} />
         <Root.Screen name={screenNames.LOGIN_SCREEN} component={LoginScreen} />
-        <Root.Screen name={screenNames.RESET_PASSWORD_SCREEN} component={ResetPasswordScreen} />
-        <Root.Screen name={screenNames.SCAN_QR_RESULT_SCREEN} component={ScanQRResultScreen} />
+        <Root.Screen
+          name={screenNames.RESET_PASSWORD_SCREEN}
+          component={ResetPasswordScreen}
+        />
+        <Root.Screen
+          name={screenNames.SCAN_QR_RESULT_SCREEN}
+          component={ScanQRResultScreen}
+        />
         <Root.Screen name={screenNames.MAIN_TAB} component={BottomTab} />
-        <Root.Screen name={screenNames.SCAN_QR_SCREEN} component={ScanQRScreen} />
-        <Root.Screen name={screenNames.CHOOSE_READ_METHOD} component={ChooseReadMethod} />
+        <Root.Screen
+          name={screenNames.SCAN_QR_SCREEN}
+          component={ScanQRScreen}
+        />
+        <Root.Screen
+          name={screenNames.CHOOSE_READ_METHOD}
+          component={ChooseReadMethod}
+        />
+        <Root.Screen name={screenNames.MAIN_CAM} component={MainCamera} />
       </Root.Navigator>
       {/* <Toast config={toastConfig} /> */}
       <Loading />
@@ -69,7 +86,10 @@ export const DriversStack = () => {
           headerShown: false,
           contentStyle: { backgroundColor: colors.gray[10] },
         }}>
-        <Drivers.Screen name={screenNames.DRIVER_SCREEN} component={DriverScreen} />
+        <Drivers.Screen
+          name={screenNames.DRIVER_SCREEN}
+          component={DriverScreen}
+        />
       </Drivers.Navigator>
     </Fragment>
   );

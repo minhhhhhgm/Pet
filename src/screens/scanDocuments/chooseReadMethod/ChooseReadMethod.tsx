@@ -3,7 +3,8 @@ import ChooseReadMethodContent from './components/ChooseReadMethodContent';
 import useChooseReadMethod from './hooks/useChooseReadMethod';
 
 const ChooseReadMethod = () => {
-  const { readMethods, selectedMethod, setSelectedMethod, onSubmit } = useChooseReadMethod();
+  const { readMethods, selectedMethod, setSelectedMethod, onSubmit } =
+    useChooseReadMethod();
 
   return (
     <ChooseReadMethodContent

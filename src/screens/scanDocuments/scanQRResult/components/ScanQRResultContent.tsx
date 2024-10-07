@@ -88,7 +88,10 @@ const ScanQRResultContent = ({
             </View>
             <SizeBox width={10} />
             <View style={styles.chassisNumberContainer}>
-              <MText style={styles.chassisNumber}>{`${"translate('scanQRCode.vinTitle')"} : ${
+              <MText
+                style={
+                  styles.chassisNumber
+                }>{`${"translate('scanQRCode.vinTitle')"} : ${
                 carInformation.vin
               }`}</MText>
             </View>
@@ -108,9 +111,10 @@ const ScanQRResultContent = ({
             )}
 
             <View style={styles.noteWrapper}>
-              {!!scannedImage ? (
+              {scannedImage ? (
                 <View style={styles.warning}>
-                  <MText style={[styles.warningTitle, { color: colors.black[100] }]}>
+                  <MText
+                    style={[styles.warningTitle, { color: colors.black[100] }]}>
                     {"translate('scanQRCode.checkList')"}
                   </MText>
                 </View>
@@ -128,7 +132,7 @@ const ScanQRResultContent = ({
               <View style={styles.warningContent}>
                 <MText style={styles.dot}>・</MText>
                 <MText style={styles.carName}>
-                  {!!scannedImage
+                  {scannedImage
                     ? "translate('scanQRCode.noteAfterCapture1')"
                     : "translate('scanQRCode.captureWarningContent1')"}
                 </MText>
@@ -137,7 +141,7 @@ const ScanQRResultContent = ({
               <View style={styles.warningContent}>
                 <MText style={styles.dot}>・</MText>
                 <MText style={styles.carName}>
-                  {!!scannedImage
+                  {scannedImage
                     ? "translate('scanQRCode.noteAfterCapture2')"
                     : "translate('scanQRCode.captureWarningContent2')"}
                 </MText>
@@ -145,7 +149,7 @@ const ScanQRResultContent = ({
             </View>
 
             <SizeBox height={8} />
-            {!!scannedImage ? (
+            {scannedImage ? (
               <View>
                 <Image source={{ uri: scannedImage }} style={styles.preDoc} />
                 <SizeBox height={8} />
@@ -164,7 +168,8 @@ const ScanQRResultContent = ({
         )}
       </Container>
 
-      <View style={[styles.bottomAction, !!bottom && { paddingBottom: bottom }]}>
+      <View
+        style={[styles.bottomAction, !!bottom && { paddingBottom: bottom }]}>
         <ButtonComponents />
       </View>
     </>

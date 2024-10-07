@@ -16,10 +16,11 @@ export default function Stepper({ currentStep, tabs }: StepperProps) {
           style={[
             styles.tab,
             {
-              backgroundColor: currentStep >= i ? colors.primary : colors.green[50],
+              backgroundColor:
+                currentStep >= i ? colors.primary : colors.green[50],
             },
           ]}
-        />
+        />,
       );
     }
     return views;

@@ -1,4 +1,4 @@
-import { NavigationContainer, useRoute } from '@react-navigation/native'
+import { NavigationContainer, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { navigationRef } from './service';
 import { RootStack } from './stack';

@@ -15,6 +15,7 @@ const screenNames = {
   SELECT_BRANCH_SCREEN: 'SELECT_BRANCH_SCREEN',
   CHOOSE_READ_METHOD: 'CHOOSE_READ_METHOD',
   SCAN_SOCKET_QR: 'SCAN_SOCKET_QR',
+  MAIN_CAM: 'MAIN_CAM',
 };
 
 export default screenNames;
