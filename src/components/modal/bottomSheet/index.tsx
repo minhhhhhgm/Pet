@@ -25,8 +25,8 @@ const BottomSheet = ({
       hasBackdrop
       onBackdropPress={() => !fullScreen && closeModal()}
       style={{ margin: 0 }}
-      animationIn='zoomIn'
-      animationOut='zoomOut'
+      animationIn="zoomIn"
+      animationOut="zoomOut"
       isVisible={visible}>
       <SafeAreaView />
       <View style={[styles.modal, fullScreen && { flex: 1 }, containerStyle]}>

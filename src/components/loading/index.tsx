@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Modal, StyleSheet, View } from 'react-native';
 import { useAppSelector } from 'reduxStore';
 import colors from 'utils/colors';
 
@@ -8,11 +8,15 @@ const Loading = () => {
 
   return (
     <Fragment>
-      {loading && (
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={loading}
+        onRequestClose={() => {}}>
         <View style={styles.loadingStyle}>
           <ActivityIndicator size="large" color={colors.primary} />
         </View>
-      )}
+      </Modal>
     </Fragment>
   );
 };
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 0,
-    backgroundColor: colors.loading,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     zIndex: 9999,
   },
 });
