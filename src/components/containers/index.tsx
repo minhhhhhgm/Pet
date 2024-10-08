@@ -29,7 +29,7 @@ interface IContainerProps {
 function Container({
   children,
   style,
-  BGColor = colors.gray[70],
+  BGColor = colors.mainBlack,
   scrollable = false,
   isShowHeader = false,
   avoidKeyboard = true,

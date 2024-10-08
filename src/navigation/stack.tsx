@@ -17,6 +17,7 @@ import {
   DriverScreen,
   HomeScreen,
   MainCamera,
+  SetupScreen,
 } from 'screens';
 import colors from 'utils/colors';
 import screenNames from 'utils/constants/screenNames';
@@ -36,7 +37,7 @@ export const RootStack = () => {
           headerShown: false,
           contentStyle: { backgroundColor: colors.gray[10] },
         }}
-        initialRouteName={screenNames.LOADING}>
+        initialRouteName={screenNames.SET_UP}>
         <Root.Screen name={screenNames.LOADING} component={LoadingScreen} />
         <Root.Screen name={screenNames.LOGIN_SCREEN} component={LoginScreen} />
         <Root.Screen
@@ -57,6 +58,7 @@ export const RootStack = () => {
           component={ChooseReadMethod}
         />
         <Root.Screen name={screenNames.MAIN_CAM} component={MainCamera} />
+        <Root.Screen name={screenNames.SET_UP} component={SetupScreen} />
       </Root.Navigator>
       {/* <Toast config={toastConfig} /> */}
       <Loading />

@@ -5,7 +5,15 @@ const usePasswordValidator = (password: string) => {
   const [isValid, setValid] = useState<boolean>(false);
 
   useEffect(() => {
-    setValid(validatePassword(password));
+    console.log(password.length);
+    if(password.length >= 6){
+      console.log('true');
+      setValid(true);
+    }
+    else{ 
+      console.log('false');
+      setValid(false)}
+   
   }, [password]);
 
   return isValid;

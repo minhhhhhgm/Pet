@@ -1,6 +1,6 @@
 import useStorage from 'hooks/useStorage';
 import { navigate, navigateAndClearStack } from 'navigation/service';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { useAppDispatch } from 'reduxStore';
 import { setGlobalLoading } from 'reduxStore/slices/loadingSlice';
@@ -10,13 +10,24 @@ import apiPaths from 'services/apiPaths';
 import screenNames from 'utils/constants/screenNames';
 import useEmailValidator from './useEmailValidator';
 import usePasswordValidator from './usePasswordValidator';
+import auth from '@react-native-firebase/auth';
+import Config from 'react-native-config';
+
+export enum Step {
+  EMAIL,
+  PASSWORD,
+}
 
 const useLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [step, setStep] = useState(Step.EMAIL);
+  const [enable, setEnable] = useState(false);
+
   const isValid = useEmailValidator(email);
   const isValidPassword = usePasswordValidator(password);
-  const { postRequest } = useRequest();
+
+  const { postRequest,  getRequest } = useRequest();
   const dispatch = useAppDispatch();
   const { saveLogInData } = useStorage();
 
@@ -28,8 +39,32 @@ const useLogin = () => {
     setPassword(text ?? '');
   };
 
-  const onPushResetPassword = () => {
-    navigate(screenNames.RESET_PASSWORD_SCREEN);
+
+
+  const onChangeStep = async() => {
+    if(step === Step.EMAIL){
+      setStep(Step.PASSWORD)
+    }
+    else{
+      dispatch(setGlobalLoading(true))
+      try {
+        // const user = await auth().createUserWithEmailAndPassword(
+        //   email,
+        //   password,
+        // );
+        // console.log(user.user);
+        
+        const data = await getRequest('home/homeApi')
+        console.log(data);
+        
+        
+      } catch (error) {
+        console.log('Error during phone sign-in:', error);
+      }finally{
+        dispatch(setGlobalLoading(false))
+      }
+    }
+
   };
 
   const onLogin = async () => {
@@ -64,8 +99,10 @@ const useLogin = () => {
     isValidPassword,
     onChangeEmail,
     onChangePassword,
-    onPushResetPassword,
     onLogin,
+    step,
+    onChangeStep,
+    enable,
   };
 };
 

@@ -10,8 +10,10 @@ const LoginScreen = () => {
     password,
     onChangeEmail,
     onChangePassword,
-    onPushResetPassword,
     onLogin,
+    step,
+    onChangeStep,
+    enable,
   } = useLogin();
 
   return (
@@ -20,9 +22,13 @@ const LoginScreen = () => {
       onEmailChange={onChangeEmail}
       password={password}
       onPasswordChange={onChangePassword}
-      onPushResetPassword={onPushResetPassword}
       isPasswordAndEmailValid={isValid && isValidPassword}
       onLogin={onLogin}
+      step={step}
+      ocStepChange={onChangeStep}
+      enable={enable}
+      isValid={isValid}
+      isValidPassword={isValidPassword}
     />
   );
 };

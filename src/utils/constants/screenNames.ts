@@ -16,6 +16,7 @@ const screenNames = {
   CHOOSE_READ_METHOD: 'CHOOSE_READ_METHOD',
   SCAN_SOCKET_QR: 'SCAN_SOCKET_QR',
   MAIN_CAM: 'MAIN_CAM',
+  SET_UP: 'SET_UP',
 };
 
 export default screenNames;

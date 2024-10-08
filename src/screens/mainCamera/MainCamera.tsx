@@ -1,25 +1,19 @@
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
-import { BottomSheet, MButton, MText } from 'components';
+import { BottomSheet, MButton } from 'components';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  Image,
-  InteractionManager,
-  Pressable,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 import {
   Camera,
   PhotoFile,
   useCameraDevice,
   useCameraPermission,
 } from 'react-native-vision-camera';
-import { CarIcon, CloseIcon } from 'utils/icons';
-import { deviceHeight } from 'utils/themes';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { storage } from 'services/firebass-config';
 import { useAppDispatch } from 'reduxStore';
 import { setGlobalLoading } from 'reduxStore/slices/loadingSlice';
+import { storage } from 'services/firebass-config';
+import { CloseIcon } from 'utils/icons';
+import { deviceHeight } from 'utils/themes';
 
 const MainCamera = () => {
   const { hasPermission, requestPermission } = useCameraPermission();

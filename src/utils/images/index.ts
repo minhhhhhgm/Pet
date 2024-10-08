@@ -1,5 +1,6 @@
 const images = {
-  noImage: require('assets/images/no-image.png'),
+  setupImage: require('assets/images/blackCam.jpeg'),
+  iconLocket: require('assets/images/icon-locket.png'),
 };
 
 export default images;

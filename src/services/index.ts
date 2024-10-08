@@ -10,7 +10,7 @@ const getLogInData = async () => {
 
 let instance = axios.create({
   timeout: 30000,
-  baseURL: Config.API_URL,
+  baseURL: 'http://10.22.20.17:4000/',
 });
 
 // Add a request interceptor

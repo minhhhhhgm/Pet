@@ -12,7 +12,7 @@ import colors from 'utils/colors';
 
 export interface TextFieldProps extends TextInputProps {
   label?: string;
-  placeholder?: any;
+  placeholder?: string;
   style?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   inputWrapperStyle?: StyleProp<ViewStyle>;
@@ -28,7 +28,6 @@ const TextField = (props: TextFieldProps) => {
     style,
     containerStyle,
     inputWrapperStyle,
-    value,
     ...TextInputProps
   } = props;
   const input = useRef<TextInput>(null);
@@ -44,15 +43,12 @@ const TextField = (props: TextFieldProps) => {
       <View style={[inputWrapperStyleRoot, inputWrapperStyle]}>
         {LeftIcon && LeftIcon}
         <TextInput
+          {...TextInputProps}
           ref={input}
-          underlineColorAndroid={'transparent'}
           placeholder={placeholder}
           placeholderTextColor={'gray'}
           style={[inputStyle, style]}
-          value={value}
-          cursorColor="orange"
-          selectionColor="orange"
-          {...TextInputProps}
+          // cursorColor="orange"
         />
       </View>
     </TouchableOpacity>
@@ -63,11 +59,10 @@ export default TextField;
 
 const inputWrapperStyleRoot: ViewStyle = {
   flexDirection: 'row',
-  // borderWidth: 1,
-  borderColor: '#909090',
   borderRadius: 16,
   backgroundColor: '#222222',
   minHeight: 55,
+  alignSelf: 'stretch',
 };
 
 const inputStyle: TextStyle = {

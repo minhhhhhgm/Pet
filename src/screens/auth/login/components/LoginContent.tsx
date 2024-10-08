@@ -1,11 +1,18 @@
 import auth from '@react-native-firebase/auth';
-import { Container, MButton, MText, SizeBox, TextField } from 'components';
+import {
+  Column,
+  Container,
+  MButton,
+  MText,
+  SizeBox,
+  TextField,
+} from 'components';
 import { navigate } from 'navigation/service';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Camera, useCameraDevice } from 'react-native-vision-camera';
 import colors from 'utils/colors';
-import { VnFlag } from 'utils/icons';
+import { ChevronLeft, VnFlag } from 'utils/icons';
 import { deviceHeight } from 'utils/themes';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from 'services/firebass-config';
@@ -13,6 +20,7 @@ import { useAppDispatch } from 'reduxStore';
 import { setGlobalLoading } from 'reduxStore/slices/loadingSlice';
 import messaging from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
+import { Step } from '../hooks/useLogin';
 
 type LoginContentProps = {
   email?: string;
@@ -22,17 +30,25 @@ type LoginContentProps = {
   onPushResetPassword?: () => void;
   isPasswordAndEmailValid?: boolean;
   onLogin: () => void;
+  step?: Step;
+  ocStepChange?: () => void;
+  enable?: boolean;
+  isValid?: boolean,
+    isValidPassword?: boolean,
 };
 
 function LoginContent(props: LoginContentProps) {
   const {
     email,
     password,
-    isPasswordAndEmailValid,
     onEmailChange,
     onPasswordChange,
-    onPushResetPassword,
     onLogin,
+    step,
+    ocStepChange,
+    enable,
+    isValid,
+    isValidPassword,
   } = props;
 
   const [confirm, setConfirm] = useState<any>(null);
@@ -92,8 +108,6 @@ function LoginContent(props: LoginContentProps) {
       console.log('Invalid code.');
     }
   }
-
-  const device = useCameraDevice('back');
 
   async function requestUserPermission() {
     const authStatus = await messaging().requestPermission();
@@ -169,36 +183,63 @@ function LoginContent(props: LoginContentProps) {
   //   return unsubscribe;
   // },[])
 
+
   return (
     <Container useDismissKeyboard avoidKeyboard={false} BGColor="#111111">
-      {/* <SizeBox height={200} /> */}
-      <View style={{ alignItems: 'center' }}>
-        <MText fontSize={24} fontWeight="700">
-          What's your numbers?
-        </MText>
-      </View>
-      <SizeBox height={24} />
-      <TextField
-        inputWrapperStyle={{ marginHorizontal: 28, paddingHorizontal: 6 }}
-        LeftIcon={
-          <View
-            style={{
-              justifyContent: 'center',
-              marginLeft: 10,
-            }}>
-            <VnFlag width={25} height={36} />
-          </View>
-        }
-      />
-      <MButton
-        onPress={() => {
-          // signInWithPhoneNumberF()
-          navigate('MAIN_CAM');
-          // dispatch(setGlobalLoading(true))
-          // handleChangeAvatar()
-          // onDisplayNotification()
-        }}
-      />
+      <Column>
+        <TouchableOpacity style={styles.header}>
+          <ChevronLeft color={colors.white} width={18} height={18} />
+        </TouchableOpacity>
+
+        <SizeBox height={100} />
+
+        {step === Step.EMAIL ? (
+          <Column>
+            <View style={{ alignItems: 'center' }}>
+              <MText fontSize={28} fontWeight="700">
+                What's your email?
+              </MText>
+            </View>
+            <SizeBox height={24} />
+
+            <TextField
+              // autoFocus
+              inputWrapperStyle={{ marginHorizontal: 28, paddingHorizontal: 6 }}
+              onChangeText={onEmailChange}
+              value={email}
+            />
+          </Column>
+        ) : (
+          <Column>
+            <View style={{ alignItems: 'center' }}>
+              <MText fontSize={28} fontWeight="700">
+                What's your password?
+              </MText>
+            </View>
+            <SizeBox height={24} />
+            <TextField
+              // autoFocus
+              inputWrapperStyle={{ marginHorizontal: 28, paddingHorizontal: 6 }}
+              onChangeText={onPasswordChange}
+              value={password}
+            />
+          </Column>
+        )}
+        <SizeBox height={80} />
+
+        <MButton
+          disabled={step === Step.EMAIL ? !isValid : !isValidPassword}
+          style={{ marginHorizontal: 28 }}
+          onPress={() => {
+            // signInWithPhoneNumberF()
+            // navigate('MAIN_CAM');
+            // dispatch(setGlobalLoading(true))
+            // handleChangeAvatar()
+            // onDisplayNotification()
+            ocStepChange!()
+          }}
+        />
+      </Column>
     </Container>
   );
 }
@@ -206,14 +247,15 @@ function LoginContent(props: LoginContentProps) {
 export default LoginContent;
 
 const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-  },
   header: {
-    backgroundColor: colors.gray[80],
-    borderBottomWidth: 1,
-    borderBottomColor: colors.black[50],
+    borderRadius: 30,
+    backgroundColor: '#2E2E2E',
+    flexDirection: 'row',
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 28,
+    marginTop: 15,
   },
 });

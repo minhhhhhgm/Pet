@@ -13,8 +13,11 @@ import colors from 'utils/colors';
 
 export interface CommonRoundedButtonProps extends TouchableOpacityProps {
   icon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+
   disabled?: boolean;
   label?: string;
+  isBoldLabel?: boolean;
   primaryType?: boolean;
   secondaryType?: boolean;
   textStyle?: StyleProp<TextStyle>;
@@ -33,6 +36,8 @@ function MButton(props: CommonRoundedButtonProps) {
     style,
     textStyle,
     onPress,
+    isBoldLabel,
+    rightIcon,
   } = props;
 
   return (
@@ -54,6 +59,7 @@ function MButton(props: CommonRoundedButtonProps) {
           </>
         )}
         <MText
+          {...(isBoldLabel && { fontWeight: '700' })}
           style={[
             primaryType && styles.textPrimary,
             thirdType && { color: colors.gray[100] },
@@ -62,6 +68,12 @@ function MButton(props: CommonRoundedButtonProps) {
           ]}>
           {label}
         </MText>
+        {rightIcon && (
+          <>
+            <SizeBox width={8} />
+            {rightIcon}
+          </>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -83,7 +95,6 @@ const styles = StyleSheet.create({
   textPrimary: {
     color: colors.white,
     fontSize: 16,
-    fontFamily: 'SFPro-Bold',
   },
   titleWrapper: {
     flexDirection: 'row',
