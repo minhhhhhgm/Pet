@@ -1,9 +1,10 @@
 import SizeBox from 'components/sizeBox';
 import MText from 'components/text';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 import { BaseToastProps } from 'react-native-toast-message';
 import colors from 'utils/colors';
 import { ToastSuccess, WarningIcon } from 'utils/icons';
+import images from 'utils/images';
 
 const MBCToast = ({
   error,
@@ -13,11 +14,14 @@ const MBCToast = ({
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.wrapper, error && { borderColor: colors.primary }]}>
-        {error ? (
-          <WarningIcon width={24} height={24} />
-        ) : (
-          <ToastSuccess width={24} height={24} />
-        )}
+        <Image
+          source={images.iconLocket}
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 10,
+          }}
+        />
         <SizeBox width={8} />
         <View style={styles.titleContentWrapper}>
           <MText style={[styles.title, error && { color: colors.primary }]}>

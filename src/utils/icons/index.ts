@@ -17,6 +17,11 @@ import SettingsIcon from 'assets/icons/settings.svg';
 import ToastSuccess from 'assets/icons/toast-success.svg';
 import WarningIcon from 'assets/icons/warning.svg';
 import VnFlag from 'assets/icons/vn-flag.svg';
+import Person from 'assets/icons/person-ic.svg';
+import PersonGroup from 'assets/icons/group-person.svg';
+import FlashIcon from 'assets/icons/flash-icon.svg';
+import CamIcon from 'assets/icons/cam.svg';
+import ChevronDown from 'assets/icons/chevron-down.svg';
 
 export {
   CloseIcon,
@@ -38,4 +43,9 @@ export {
   SettingIcon,
   QuestionMarkIcon,
   VnFlag,
+  Person,
+  PersonGroup,
+  FlashIcon,
+  CamIcon,
+  ChevronDown,
 };

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import useStorage, { getUserStorage } from 'hooks/useStorage';
 import { useCallback } from 'react';
 import Config from 'react-native-config';
+import { toastError } from 'utils/helpers';
 
 const getLogInData = async () => {
   const result = await getUserStorage('LOGIN_DATA');
@@ -41,8 +42,6 @@ instance.interceptors.response.use(
 
 function useRequest() {
   const { logout } = useStorage();
-  // const translate = useAppTranslation('common');
-
   const getRequest = useCallback(
     async <Body, Response>(url: string, params?: Body): Promise<Response> => {
       try {
@@ -68,6 +67,8 @@ function useRequest() {
         >(url, data);
         return handleResponse<Body, Response>(res);
       } catch (error) {
+        console.log('error', error);
+
         return handleError(error);
       }
     },
@@ -159,11 +160,13 @@ function useRequest() {
         error.response.status >= 500 ||
         error.response.status === 404
       ) {
-        // toastError(error.response?.data?.message || translate('common:systemError'));
+        toastError(error.message ?? 'error');
+      } else if (error.response.status === 400) {
+        toastError(error.response.data.message);
       }
     } else if (errorParse.message) {
-      // toastError(errorParse.message);
-      // throw errorParse.message;
+      toastError(errorParse.message);
+      throw errorParse.message;
     }
     throw error?.response?.data || error?.response || error;
   }, []);

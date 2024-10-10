@@ -48,7 +48,7 @@ function MButton(props: CommonRoundedButtonProps) {
         primaryType && styles.primary,
         secondaryType && { backgroundColor: colors.blue[100], borderWidth: 0 },
         thirdType && { backgroundColor: colors.white, borderWidth: 0 },
-        disabled && { backgroundColor: colors.gray[10], borderWidth: 0 },
+        disabled && { backgroundColor: colors.gray[24], borderWidth: 0 },
         style,
       ]}>
       <View style={styles.titleWrapper}>
@@ -59,6 +59,7 @@ function MButton(props: CommonRoundedButtonProps) {
           </>
         )}
         <MText
+          fontSize={20}
           {...(isBoldLabel && { fontWeight: '700' })}
           style={[
             primaryType && styles.textPrimary,
@@ -93,8 +94,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   textPrimary: {
-    color: colors.white,
-    fontSize: 16,
+    color: '#261A03',
   },
   titleWrapper: {
     flexDirection: 'row',

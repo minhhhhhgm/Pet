@@ -23,15 +23,13 @@ const LoadingScreen = () => {
       const auth = await getLogInData();
       if (auth && auth.token) {
         dispatch(loginSuccess(auth));
-        gotoScreen(screenNames.MAIN_TAB);
+        gotoScreen(screenNames.MAIN_CAM);
       } else {
-        gotoScreen(screenNames.LOGIN_SCREEN);
+        gotoScreen(screenNames.SET_UP);
       }
     };
 
-    init().finally(async () => {
-      // await BootSplash.hide({ fade: true });
-    });
+    init();
   });
 
   return <></>;

@@ -1,5 +1,5 @@
 import useStorage from 'hooks/useStorage';
-import { navigate, navigateAndClearStack } from 'navigation/service';
+import { goBack, navigate, navigateAndClearStack } from 'navigation/service';
 import { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { useAppDispatch } from 'reduxStore';
@@ -27,7 +27,7 @@ const useLogin = () => {
   const isValid = useEmailValidator(email);
   const isValidPassword = usePasswordValidator(password);
 
-  const { postRequest,  getRequest } = useRequest();
+  const { postRequest, getRequest } = useRequest();
   const dispatch = useAppDispatch();
   const { saveLogInData } = useStorage();
 
@@ -39,32 +39,23 @@ const useLogin = () => {
     setPassword(text ?? '');
   };
 
-
-
-  const onChangeStep = async() => {
-    if(step === Step.EMAIL){
-      setStep(Step.PASSWORD)
+  const onBack = () => {
+    if (step === Step.PASSWORD) {
+      setStep(Step.EMAIL);
+    } else {
+      goBack();
     }
-    else{
-      dispatch(setGlobalLoading(true))
-      try {
-        // const user = await auth().createUserWithEmailAndPassword(
-        //   email,
-        //   password,
-        // );
-        // console.log(user.user);
-        
-        const data = await getRequest('home/homeApi')
-        console.log(data);
-        
-        
-      } catch (error) {
-        console.log('Error during phone sign-in:', error);
-      }finally{
-        dispatch(setGlobalLoading(false))
-      }
-    }
+  };
 
+  const onChangeStep = async () => {
+    if (step === Step.EMAIL) {
+      setStep(Step.PASSWORD);
+    } else {
+      navigate(screenNames.SET_UP_INFORMATION, {
+        email,
+        password,
+      });
+    }
   };
 
   const onLogin = async () => {
@@ -103,6 +94,7 @@ const useLogin = () => {
     step,
     onChangeStep,
     enable,
+    onBack,
   };
 };
 

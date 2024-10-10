@@ -48,7 +48,7 @@ const TextField = (props: TextFieldProps) => {
           placeholder={placeholder}
           placeholderTextColor={'gray'}
           style={[inputStyle, style]}
-          // cursorColor="orange"
+          cursorColor="orange"
         />
       </View>
     </TouchableOpacity>

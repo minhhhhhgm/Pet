@@ -14,6 +14,7 @@ const LoginScreen = () => {
     step,
     onChangeStep,
     enable,
+    onBack,
   } = useLogin();
 
   return (
@@ -29,6 +30,7 @@ const LoginScreen = () => {
       enable={enable}
       isValid={isValid}
       isValidPassword={isValidPassword}
+      onBack={onBack}
     />
   );
 };

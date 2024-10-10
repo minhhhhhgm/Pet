@@ -18,10 +18,11 @@ import {
   HomeScreen,
   MainCamera,
   SetupScreen,
+  SetUpInformationScreen,
 } from 'screens';
 import colors from 'utils/colors';
 import screenNames from 'utils/constants/screenNames';
-// import { toastConfig } from 'utils/helpers';
+import { toastConfig } from 'utils/helpers';
 
 const Root = createNativeStackNavigator();
 const Home = createNativeStackNavigator();
@@ -37,9 +38,14 @@ export const RootStack = () => {
           headerShown: false,
           contentStyle: { backgroundColor: colors.gray[10] },
         }}
-        initialRouteName={screenNames.SET_UP}>
+        initialRouteName={screenNames.LOADING}>
         <Root.Screen name={screenNames.LOADING} component={LoadingScreen} />
         <Root.Screen name={screenNames.LOGIN_SCREEN} component={LoginScreen} />
+        <Root.Screen
+          name={screenNames.SET_UP_INFORMATION}
+          component={SetUpInformationScreen}
+        />
+
         <Root.Screen
           name={screenNames.RESET_PASSWORD_SCREEN}
           component={ResetPasswordScreen}
@@ -60,7 +66,7 @@ export const RootStack = () => {
         <Root.Screen name={screenNames.MAIN_CAM} component={MainCamera} />
         <Root.Screen name={screenNames.SET_UP} component={SetupScreen} />
       </Root.Navigator>
-      {/* <Toast config={toastConfig} /> */}
+      <Toast config={toastConfig} />
       <Loading />
     </Fragment>
   );

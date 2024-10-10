@@ -33,8 +33,9 @@ type LoginContentProps = {
   step?: Step;
   ocStepChange?: () => void;
   enable?: boolean;
-  isValid?: boolean,
-    isValidPassword?: boolean,
+  isValid?: boolean;
+  isValidPassword?: boolean;
+  onBack?: () => void;
 };
 
 function LoginContent(props: LoginContentProps) {
@@ -49,6 +50,7 @@ function LoginContent(props: LoginContentProps) {
     enable,
     isValid,
     isValidPassword,
+    onBack,
   } = props;
 
   const [confirm, setConfirm] = useState<any>(null);
@@ -116,11 +118,11 @@ function LoginContent(props: LoginContentProps) {
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
     const fcmToken = await messaging().getToken();
     if (fcmToken) {
-      console.log(fcmToken);
+      console.log('fcmToken', fcmToken);
     }
 
     if (enabled) {
-      console.log('Authorization status:', authStatus);
+      // console.log('Authorization status:', authStatus);
     }
   }
 
@@ -156,7 +158,7 @@ function LoginContent(props: LoginContentProps) {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       // Display a local notification
       console.log('remoteMessage', remoteMessage);
-
+      await notifee.requestPermission();
       const channelId = await notifee.createChannel({
         id: 'pet',
         name: 'pet Channel',
@@ -166,8 +168,8 @@ function LoginContent(props: LoginContentProps) {
         body: remoteMessage.notification?.body,
         android: {
           channelId,
-          smallIcon: 'ic_launcher', // Đảm bảo bạn có biểu tượng nhỏ này
-          largeIcon: 'ic_launcher', // Đảm bảo bạn có biểu tượng lớn này
+          smallIcon: 'ic_launcher',
+          largeIcon: 'ic_launcher',
         },
       });
     });
@@ -183,11 +185,10 @@ function LoginContent(props: LoginContentProps) {
   //   return unsubscribe;
   // },[])
 
-
   return (
-    <Container useDismissKeyboard avoidKeyboard={false} BGColor="#111111">
+    <Container useDismissKeyboard avoidKeyboard={false}>
       <Column>
-        <TouchableOpacity style={styles.header}>
+        <TouchableOpacity style={styles.header} onPress={onBack}>
           <ChevronLeft color={colors.white} width={18} height={18} />
         </TouchableOpacity>
 
@@ -203,7 +204,6 @@ function LoginContent(props: LoginContentProps) {
             <SizeBox height={24} />
 
             <TextField
-              // autoFocus
               inputWrapperStyle={{ marginHorizontal: 28, paddingHorizontal: 6 }}
               onChangeText={onEmailChange}
               value={email}
@@ -218,7 +218,6 @@ function LoginContent(props: LoginContentProps) {
             </View>
             <SizeBox height={24} />
             <TextField
-              // autoFocus
               inputWrapperStyle={{ marginHorizontal: 28, paddingHorizontal: 6 }}
               onChangeText={onPasswordChange}
               value={password}
@@ -228,6 +227,8 @@ function LoginContent(props: LoginContentProps) {
         <SizeBox height={80} />
 
         <MButton
+          label="Continue"
+          isBoldLabel
           disabled={step === Step.EMAIL ? !isValid : !isValidPassword}
           style={{ marginHorizontal: 28 }}
           onPress={() => {
@@ -236,7 +237,7 @@ function LoginContent(props: LoginContentProps) {
             // dispatch(setGlobalLoading(true))
             // handleChangeAvatar()
             // onDisplayNotification()
-            ocStepChange!()
+            ocStepChange!();
           }}
         />
       </Column>

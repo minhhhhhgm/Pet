@@ -6,7 +6,6 @@ const useEmailValidator = (email: string) => {
 
   useEffect(() => {
     setValid(validateEmail(email));
-    console.log(email);
   }, [email]);
 
   return isValidEmail;

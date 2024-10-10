@@ -9,6 +9,7 @@ import ScanQRScreen from './scanDocuments/scanQR/ScanQRScreen';
 import ScanQRResultScreen from './scanDocuments/scanQRResult/ScanQRResultScreen';
 import MainCamera from './mainCamera/MainCamera';
 import SetupScreen from './auth/setup/SetupScreen';
+import SetUpInformationScreen from './auth/setup/SetupInformationScreen';
 export {
   LoadingScreen,
   LoginScreen,
@@ -21,4 +22,5 @@ export {
   HomeScreen,
   MainCamera,
   SetupScreen,
+  SetUpInformationScreen,
 };

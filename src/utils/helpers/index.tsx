@@ -54,7 +54,7 @@ export const toastError = (text1: string, text2?: string) => {
   return Toast.show({
     type: 'error',
     text1: text1,
-    text2: text2 || 'エラー',
+    text2: text2 || 'Lock cuc',
   });
 };
 
