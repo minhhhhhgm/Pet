@@ -21,7 +21,7 @@ const LoadingScreen = () => {
   useEffect(() => {
     const init = async () => {
       const auth = await getLogInData();
-      if (auth && auth.token) {
+      if (auth && auth.token) {        
         dispatch(loginSuccess(auth));
         gotoScreen(screenNames.MAIN_CAM);
       } else {

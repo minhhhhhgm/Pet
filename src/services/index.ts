@@ -19,13 +19,16 @@ instance.interceptors.request.use(
   async function (config) {
     const auth = await getLogInData();
     if (auth && auth.token) {
+      
+      
       config.headers.Authorization = `Bearer ${auth.token}`;
+      console.log(config.headers.Authorization);
     } else {
       delete config.headers.Authorization;
     }
     return config;
   },
-  function (error) {
+  function (error) {    
     return Promise.reject(error);
   },
 );
@@ -67,8 +70,6 @@ function useRequest() {
         >(url, data);
         return handleResponse<Body, Response>(res);
       } catch (error) {
-        console.log('error', error);
-
         return handleError(error);
       }
     },
@@ -163,12 +164,14 @@ function useRequest() {
         toastError(error.message ?? 'error');
       } else if (error.response.status === 400) {
         toastError(error.response.data.message);
+        // return
       }
     } else if (errorParse.message) {
       toastError(errorParse.message);
       throw errorParse.message;
     }
-    throw error?.response?.data || error?.response || error;
+    // throw error?.response?.data || error?.response || error;
+    return error 
   }, []);
 
   return {

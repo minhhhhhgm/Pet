@@ -11,6 +11,7 @@
     "lint:fix": "prettier --write './**/*.{ts,tsx}' && eslint --fix './**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.6.4",
     "@notifee/react-native": "^8.0.0",
     "@react-native-async-storage/async-storage": "^1.22.3",
     "@react-native-firebase/app": "^21.0.0",
@@ -30,6 +31,7 @@
     "react-native-gesture-handler": "^2.20.0",
     "react-native-modal": "^13.0.1",
     "react-native-orientation-locker": "^1.7.0",
+    "react-native-reanimated": "^3.15.4",
     "react-native-safe-area-context": "^4.11.0",
     "react-native-screens": "^3.34.0",
     "react-native-svg": "^15.7.1",

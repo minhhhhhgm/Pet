@@ -46,6 +46,10 @@ export const RootStack = () => {
           component={SetUpInformationScreen}
         />
 
+        <Profile.Screen
+          name={screenNames.ACCOUNT_SETTING_SCREEN}
+          component={AccountSettingScreen}
+        />
         <Root.Screen
           name={screenNames.RESET_PASSWORD_SCREEN}
           component={ResetPasswordScreen}

@@ -22,6 +22,9 @@ import PersonGroup from 'assets/icons/group-person.svg';
 import FlashIcon from 'assets/icons/flash-icon.svg';
 import CamIcon from 'assets/icons/cam.svg';
 import ChevronDown from 'assets/icons/chevron-down.svg';
+import SearchIcon from 'assets/icons/search-icon.svg';
+import AvatarIcon from 'assets/icons/avavtar.svg'
+import PlusIcon from 'assets/icons/plus-icon.svg'
 
 export {
   CloseIcon,
@@ -48,4 +51,7 @@ export {
   FlashIcon,
   CamIcon,
   ChevronDown,
+  SearchIcon,
+  AvatarIcon,
+  PlusIcon
 };

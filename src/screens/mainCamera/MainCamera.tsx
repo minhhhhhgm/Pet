@@ -43,27 +43,18 @@ import {
 import { deviceHeight, deviceWidth } from 'utils/themes';
 import messaging from '@react-native-firebase/messaging';
 import images from 'utils/images';
+import { navigate } from 'navigation/service';
+import screenNames from 'utils/constants/screenNames';
 
 const MainCamera = () => {
   const { hasPermission, requestPermission } = useCameraPermission();
   const [photo, setPhoto] = useState<PhotoFile>();
-  const [isPhotoTaken, setIsPhotoTaken] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const isFocused = useIsFocused();
   const camera = useRef<Camera>(null);
   const device = useCameraDevice('back');
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    console.log('Component loaded');
-    const get = async () => {
-      const fcmToken = await messaging().getToken();
-      if (fcmToken) {
-        console.log('fcmToken', fcmToken);
-      }
-    };
-    get();
-    // Nếu có một useEffect nào khác ảnh hưởng đến trạng thái của nút, hãy kiểm tra ở đây.
-  }, []);
+
 
   useEffect(() => {
     if (!hasPermission) {
@@ -84,18 +75,14 @@ const MainCamera = () => {
   const takePicture = async () => {
     console.log('CLICK');
 
-    if (camera.current && !isPhotoTaken) {
-      // Kiểm tra để tránh gọi hàm chụp nhiều lần
+    if (camera.current) {
       try {
-        setIsPhotoTaken(true); // Đánh dấu ảnh đã chụp
         const photoData = await camera.current.takePhoto();
         requestAnimationFrame(() => {
           setPhoto(photoData);
         });
-        setIsPhotoTaken(false); // Reset lại trạng thái sau khi chụp xong
       } catch (error) {
         console.error('Error taking photo:', error);
-        setIsPhotoTaken(false);
       }
     }
   };
@@ -136,34 +123,15 @@ const MainCamera = () => {
       dispatch(setGlobalLoading(false));
     }
   };
-  const renderCamera = useMemo(() => {
-    if (hasPermission && !photo) {
-      return (
-        <Camera
-          enableZoomGesture
-          style={{ flex: 1 }}
-          device={device!}
-          isActive={true}
-          photo={true}
-          ref={camera}
-        />
-      );
-    }
-    return null;
-  }, [hasPermission, photo, device]);
   const flatListRef = useRef<FlatList>(null);
   const [activeIndex, setActiveIndex] = useState(false);
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const currentOffset = event.nativeEvent.contentOffset.y; // Lấy vị trí hiện tại của cuộn
-    // const direction = currentOffset > lastScrollPosition ? 'down' : 'up'; // Xác định hướng cuộn
-    // console.log('currentOffset',currentOffset, deviceHeight);
+    const currentOffset = event.nativeEvent.contentOffset.y;
     if (currentOffset > deviceHeight) {
       setActiveIndex(true);
     } else {
       setActiveIndex(false);
     }
-    // setScrollDirection(direction);
-    // setLastScrollPosition(currentOffset); // Cập nhật vị trí cuộn
   };
   return (
     <Container style={{ flex: 1 }}>
@@ -177,23 +145,24 @@ const MainCamera = () => {
           zIndex: 1,
           width: '100%',
         }}>
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor: colors.gray[30],
             padding: 10,
             borderRadius: 99,
           }}>
           <PersonGroup width={24} height={24} />
-        </View>
+        </TouchableOpacity>
 
-        <View
+        <TouchableOpacity
+          onPress={()=>navigate(screenNames.ACCOUNT_SETTING_SCREEN)}
           style={{
             backgroundColor: colors.gray[30],
             padding: 10,
             borderRadius: 99,
           }}>
           <Person width={24} height={24} />
-        </View>
+        </TouchableOpacity>
       </Row>
       <View
         style={{
@@ -229,12 +198,12 @@ const MainCamera = () => {
                         height: deviceHeight * 0.6,
                         justifyContent: 'center',
                       }}>
-                      {hasPermission && (
+                      {hasPermission && index === 0 && (
                         <Camera
                           enableZoomGesture
                           style={{ flex: 1 }}
                           device={device!}
-                          isActive={index === 0 && hasPermission}
+                          isActive={index === 0 && hasPermission && isFocused}
                           photo={true}
                           ref={camera}
                         />
